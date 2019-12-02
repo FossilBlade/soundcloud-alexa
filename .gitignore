@@ -2,3 +2,4 @@
 /venv/
 /build
 .idea
+__pycache__
