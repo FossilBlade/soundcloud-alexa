@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "whats new in software engineering",
+            "invocationName": "software engineering",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -35,22 +35,13 @@
                     "name": "PodcastIntent",
                     "slots": [],
                     "samples": [
-                        "software engineering podcast",
-                        "whats new in software engineering",
-                        "Likes"
+
+                        "whats new in software engineering"
+
 
                     ]
                 },
-                {
-                    "name": "TrackInfoIntent",
-                    "slots": [],
-                    "samples": [
-                        "the current track",
-                        "what is playing right now",
-                        "name of the current track",
-                        "what is the name"
-                    ]
-                },
+
                 {
                     "name": "AMAZON.NavigateHomeIntent",
                     "samples": []
