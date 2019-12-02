@@ -1,28 +1,30 @@
-lambdazip:
-	rm -rf build
-	mkdir build
-	cp lambda/requirements.txt build/requirements.txt
-	cp lambda/skill.py build/skill.py
-	cp lambda/ssml_builder.py build/ssml_builder.py
-	cp lambda/queue_manager.py build/queue_manager.py
-	pip install -r lambda/requirements.txt -t build/.
-	cd build && zip skill . -r
-
-
-lambdaupdate:
-	rm build/skill.zip
-	cp lambda/skill.py build/skill.py
-	cp lambda/ssml_builder.py build/ssml_builder.py
-	cp lambda/queue_manager.py build/queue_manager.py
-	cd build && zip skill . -r
-	aws lambda --profile lm update-function-code --function-name alexa-soundcloud --zip-file fileb://build/skill.zip
-
-push-to-lm:
-	aws lambda --profile lm update-function-code --function-name alexa-soundcloud --zip-file fileb://build/skill.zip
-
 clean:
 	rm -rf build
 
-deploy: lambdazip push-to-lm
+make-build: clean
+	mkdir -p build
 
-update: lambdaupdate
+copy-src:
+	cp src/skill.py build/skill.py
+	cp src/ssml_builder.py build/ssml_builder.py
+	cp src/session_handler.py build/session_handler.py
+	cp src/queue_manager.py build/queue_manager.py
+	cp src/__init__.py build/__init__.py || touch __init__.py
+
+install-dep:
+	pip install -r requirements.txt -t build/.
+
+zip-lambda:
+	cd build && rm skill.zip ; zip skill . -r
+
+update-lambda-zip: copy-src zip-lambda
+
+push-to-lm:
+	aws lambda --profile lm update-function-code --function-name soundcloud-alexa --zip-file fileb://build/skill.zip
+
+build: make-build copy-src install-dep zip-lambda
+
+update: update-lambda-zip;
+
+deploy: push-to-lm
+

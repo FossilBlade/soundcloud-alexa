@@ -15,19 +15,15 @@ class DecimalEncoder(json.JSONEncoder):
                 return int(o)
         return super(DecimalEncoder, self).default(o)
 
-endpoint_url = os.getenv('DDB_ENDPOINT_URL') or None
-#
-# ddb = boto3.resource('dynamodb', endpoint_url=endpoint_url, region_name='us-east-1',
-#                      aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
-#                      aws_secret_access_key=os.getenv('AWS_ACCESS_KEY_ID'))
+endpoint_url = os.environ.get('DDB_ENDPOINT_URL') or None
 
-if os.getenv('AWS_ACCESS_KEY_ID') and os.getenv('AWS_ACCESS_KEY_ID'):
-    ddb = boto3.resource('dynamodb', endpoint_url=endpoint_url,
-                         aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
-                         aws_secret_access_key=os.getenv('AWS_ACCESS_KEY_ID'))
+if os.environ.get('AWS_ACCESS_KEY_ID') and os.environ.get('AWS_ACCESS_KEY_SECRET') and os.environ.get('AWS_REGION'):
+    ddb = boto3.resource('dynamodb',endpoint_url=endpoint_url,
+                         aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
+                         aws_secret_access_key=os.environ.get('AWS_ACCESS_KEY_SECRET'),
+                         region_name=os.environ.get('AWS_REGION'))
 else:
     ddb = boto3.resource('dynamodb',endpoint_url=endpoint_url)
-
 
 def get_user_queue(user_id):
     table = ddb.Table('user_session')

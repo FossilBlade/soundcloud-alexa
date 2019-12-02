@@ -43,7 +43,6 @@ def all_links():
 
 
 def getStreamUrl(track_id):
-    # return stream url for the given id
     return "https://api.soundcloud.com/tracks/{}/stream?client_id={}".format(track_id, sc_client_id)
 
 
@@ -51,20 +50,9 @@ def getTrack(_id):
     return sc_client.get('/tracks/' + str(_id)).fields()
 
 
-# @ask.on_session_started
-# def session_ended():
-#     global queue
-#     queue = QueueManager([])
-#     log.info("SESSION STARTED")
-
-
 @ask.launch
 def launch():
-    # question_text = SSML().sentence('You can say "Alexa, whats new in software engineering"')
-    # welcom_text = SSML().interjection("Hey").sentence("Welcome to software engineer podcast !",childElements=[question_text])
-    #
-    # prompt = "Sorry, I didn't get that. Can you please repeat?"
-    # return statement(welcom_text).reprompt(prompt)
+
     return start_playlist()
 
 
@@ -93,7 +81,7 @@ def start_playlist():
 
 @ask.default_intent
 def default_intent():
-    log.info(str(request))
+    log.info("Called Default Intent. Request: {}".format(request))
 
 # QueueManager object is not stepped forward here.
 # This allows for Next Intents and on_playback_finished requests to trigger the step
@@ -109,8 +97,7 @@ def nearly_finished():
 
 @ask.on_playback_finished()
 def play_back_finished():
-    # if session.attributes.get("data"):
-    #     queue.load(session.attributes.get("data"))
+
     log.info(request)
     queue = get_queue(session.user.userId)
 
@@ -164,7 +151,7 @@ def restart_track():
     if queue.current:
         return audio('Playing the track again').play(getStreamUrl(queue.current), offset=0)
     else:
-        return audio('sorry but there is nothing to start over.')
+        return audio('sorry, there is nothing to start over.')
 
 
 @ask.on_playback_started()
@@ -218,10 +205,6 @@ def get_queue(user_id):
 def save_queue(user_id,queue):
     sh.update_user_queue(user_id, queue.export())
 
-def info(obj, indent=2):
-    msg = json.dumps(obj.intent.name, indent=indent)
-    log.info(msg)
-
-# def lambda_handler(event, _context):
-#     return ask.run_aws_lambda(event)
+def lambda_handler(event, _context):
+    return ask.run_aws_lambda(event)
 
