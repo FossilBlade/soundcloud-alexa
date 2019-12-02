@@ -4,6 +4,7 @@ import decimal
 import os
 from boto3.dynamodb.conditions import Key, Attr
 
+session_table_name = 'UserSession'
 
 # Helper class to convert a DynamoDB item to JSON.
 class DecimalEncoder(json.JSONEncoder):
@@ -26,7 +27,7 @@ else:
     ddb = boto3.resource('dynamodb',endpoint_url=endpoint_url)
 
 def get_user_queue(user_id):
-    table = ddb.Table('user_session')
+    table = ddb.Table(session_table_name)
 
     response = table.query(
         ProjectionExpression="queueState",
@@ -50,7 +51,7 @@ def get_user_queue(user_id):
 
 
 def update_user_queue(user_id, queue_state):
-    table = ddb.Table('user_session')
+    table = ddb.Table(session_table_name)
 
     response = table.update_item(
         Key={

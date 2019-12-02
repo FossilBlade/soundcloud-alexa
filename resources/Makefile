@@ -5,6 +5,7 @@ make-build: clean
 	mkdir -p build
 
 copy-src:
+	cp requirements.txt build/requirements.txt
 	cp src/skill.py build/skill.py
 	cp src/ssml_builder.py build/ssml_builder.py
 	cp src/session_handler.py build/session_handler.py
@@ -26,5 +27,5 @@ build: make-build copy-src install-dep zip-lambda
 
 update: update-lambda-zip;
 
-deploy: push-to-lm
+deploy-updated: update push-to-lm
 

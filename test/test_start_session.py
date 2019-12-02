@@ -1,4 +1,4 @@
-from src.skill import app,start_playlist
+from src.skill import app
 
 import pytest, json
 from datetime import datetime
@@ -24,7 +24,7 @@ def test_start_session_new_user(client):
     timestampStr = dateTimeObj.strftime("%d-%b-%Y %H:%M:%S.%f")
 
     req['session']['user']['userId'] = 'New User '+timestampStr
-    rs = client.post('/raush', json=req)
+    rs = client.post('/', json=req)
     assert rs.status_code == 200
 
     res_json=rs.get_data().decode('utf-8')
@@ -34,7 +34,7 @@ def test_start_session_new_user(client):
 
 
 def test_next(client):
-    rs = client.post('/raush', json=get_request_json('next'))
+    rs = client.post('/', json=get_request_json('next'))
     assert rs.status_code == 200
 
     res_json=rs.get_data().decode('utf-8')
@@ -44,7 +44,7 @@ def test_next(client):
 
 
 def test_previous(client):
-    rs = client.post('/raush', json=get_request_json('previous'))
+    rs = client.post('/', json=get_request_json('previous'))
     assert rs.status_code == 200
 
     res_json=rs.get_data().decode('utf-8')

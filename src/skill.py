@@ -27,13 +27,13 @@ if sc_access_token:
 ## Flask-Ask Setup
 app = Flask(__name__)
 
-ask = Ask(app, "/raush")
+ask = Ask(app, "/")
 logging.getLogger('flask_ask').setLevel(logging.INFO)
 
 # queue = None
 logging.info("Initial")
 
-@app.route("/")
+@app.route("/links")
 def all_links():
     links = []
     for rule in app.url_map.iter_rules():
