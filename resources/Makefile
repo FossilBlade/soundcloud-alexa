@@ -1,3 +1,6 @@
+verify:
+	python --verison
+
 clean:
 	rm -rf build
 
@@ -29,6 +32,6 @@ update: update-lambda-zip;
 
 deploy-updated: update push-to-lm
 
-deploy: build push-to-lm
+deploy: verify build push-to-lm
 
 
