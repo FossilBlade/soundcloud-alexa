@@ -21,7 +21,7 @@ zip-lambda:
 update-lambda-zip: copy-src zip-lambda
 
 push-to-lm:
-	aws lambda --profile lm update-function-code --function-name soundcloud-alexa --zip-file fileb://build/skill.zip
+	aws lambda update-function-code --function-name soundcloud-alexa --zip-file fileb://build/skill.zip
 
 build: make-build copy-src install-dep zip-lambda
 
