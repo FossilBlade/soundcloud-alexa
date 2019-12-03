@@ -1,5 +1,6 @@
 verify:
-	python --verison
+	python --version
+	pip --version
 
 clean:
 	rm -rf build
