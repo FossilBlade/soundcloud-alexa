@@ -29,3 +29,6 @@ update: update-lambda-zip;
 
 deploy-updated: update push-to-lm
 
+deploy: build push-to-lm
+
+
