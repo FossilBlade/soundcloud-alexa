@@ -1,0 +1,28 @@
+
+on:
+  push:
+    branches:
+      - master
+
+name: Deploy Soundcloud-Alexa to AWS Lambda
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.VISHAL_AWS_LAMBDA_USER_KEY }}
+        aws-secret-access-key: ${{ secrets.VISHAL_AWS_LAMBDA_USER_SEC }}
+        aws-region: us-west-2
+    
+    - name: Build the Lambda zip      
+      run: make -f resources/Makefile deploy
+   
+
+    
