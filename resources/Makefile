@@ -1,6 +1,6 @@
 verify:
-	python --version
-	pip --version
+	python3 --version
+	pip3 --version
 
 clean:
 	rm -rf build
@@ -17,7 +17,7 @@ copy-src:
 	cp src/__init__.py build/__init__.py || touch __init__.py
 
 install-dep:
-	pip install -r requirements.txt -t build/.
+	pip3 install -r requirements.txt -t build/.
 
 zip-lambda:
 	cd build && rm skill.zip ; zip skill . -r
