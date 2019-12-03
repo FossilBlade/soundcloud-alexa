@@ -21,8 +21,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install awscli --upgrade
         echo "Done install AWS"
-        # Dowgrading pip to a specofic version to support install on Flask-Ask
-        python -m pip install --upgrade pip=9.0.3
+        echo "Dowgrading pip to a specofic version to support install on Flask-Ask"
+        python -m pip install --upgrade pip==9.0.3
     
       
     - name: Checkout
@@ -35,7 +35,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.VISHAL_AWS_LAMBDA_USER_SEC }}
         aws-region: us-west-2
     
-    - name: Build the Lambda zip      
+    - name: Build and Deploy Lambda zip      
       run: make -f resources/Makefile deploy
    
 
