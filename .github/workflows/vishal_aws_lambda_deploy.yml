@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: install awscli
+      run: apk add --no-cache python3 && pip3 install --upgrade pip=9.0.3 && pip3 install awscli --upgrade && echo "Done install AWS"
+      
     - name: Checkout
       uses: actions/checkout@v1
 
