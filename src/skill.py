@@ -10,10 +10,10 @@ from flask import Flask, jsonify
 
 from flask_ask import Ask, statement, audio, session, logger as log, request
 
-from .queue_manager import QueueManager
-from .ssml_builder import SSML
+from queue_manager import QueueManager
+from ssml_builder import SSML
 
-from . import session_handler as sh
+import session_handler as sh
 
 ## Soundcloud Setup
 sc_client_id = "8c63b5c6be310a43a0695f442b90d53d"

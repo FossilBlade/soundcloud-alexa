@@ -1,10 +1,6 @@
-
 boto3
-
 cryptography
-
 Flask
 Flask-Ask==0.9.8
-
 soundcloud
 
