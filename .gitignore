@@ -1,5 +1,4 @@
-# Project exclude paths
-/venv/
+/venv
 /build
 .idea
 __pycache__

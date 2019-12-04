@@ -78,6 +78,33 @@ def start_playlist():
     stream_url = getStreamUrl(track_id)
     return audio(speech).play(stream_url)
 
+# def get_latest_track_queue()
+
+@ask.intent('NukeSessionIntent')
+def start_playlist():
+    log.info(str(request))
+    log.info(session.user.userId)
+
+    save_queue(session.user.userId, QueueManager([]))
+
+    # queue = get_queue(session.user.userId)
+    #
+    # if not queue.isEmpty():
+    #     speech = 'resuming from where you left off'
+    #     track_id = queue.current
+    # else:
+    #     speech = 'playing the latest podcast'
+    #
+    #     tracks = sc_client.get('/users/' + str(sc_my_user_id) + '/tracks', linked_partitioning=1)
+    #     tracks = json.loads(tracks.raw_data)['collection']
+    #     for track in tracks:
+    #         queue.add(track['id'])
+    #     track_id = queue.start()
+    #     save_queue(session.user.userId, queue)
+    #
+    # stream_url = getStreamUrl(track_id)
+    return audio('your session has been reset.')
+
 
 @ask.default_intent
 def default_intent():

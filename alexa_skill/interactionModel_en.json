@@ -37,6 +37,14 @@
           "samples": [
             "whats new in software engineering"
           ]
+        },{
+          "name": "NukeSessionIntent",
+          "slots": [],
+          "samples": [
+            "nuke my session",
+            "clear my session",
+            "reset my session"
+          ]
         },
         {
           "name": "AMAZON.NavigateHomeIntent",
